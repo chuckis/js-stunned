@@ -1,4 +1,4 @@
-import { GameLoop } from './GameLoop';
+import { GameLoop } from './src/GameLoop';
 import { resources } from './src/Resource';
 import { Sprite } from './src/Sprite';
 import { Vector2 } from './src/Vector2';
