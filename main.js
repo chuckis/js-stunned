@@ -1,4 +1,6 @@
 import { GameLoop } from './src/GameLoop';
+import { gridCells } from './src/helpers/grid';
+import { moveTowards } from './src/helpers/moveTowards';
 import { DOWN, Input, LEFT, RIGHT, UP } from './src/Input';
 import { resources } from './src/Resource';
 import { Sprite } from './src/Sprite';
@@ -24,33 +26,40 @@ const hero = new Sprite({
     hFrames: 3,
     vFrames: 8,
     frame: 1,
-
+    position: new Vector2(gridCells(6), gridCells(5))
 })
+
+const heroDestinationPosition = new Vector2(
+    gridCells(13), gridCells(5)
+);
 
 const shadow = new Sprite({
     resource: resources.images.shadow,
     frameSize: new Vector2(32, 32)
 })
 
-const heroPos = new Vector2(16 * 6, 16 * 5);
 const input = new Input();
 
 const update = () => {
-    // Updating entities in a game
+
+    const distance = moveTowards(hero, heroDestinationPosition, 1)
+
+    return;
+    
     if (input.direction === DOWN) {
-        heroPos.y += 1;
+        hero.position.y += 1;
         hero.frame = 0;
     }
     if (input.direction === UP) {
-        heroPos.y -= 1;
+        hero.position.y -= 1;
         hero.frame = 6;
     }
     if (input.direction === RIGHT) {
-        heroPos.x += 1;
+        hero.position.x += 1;
         hero.frame = 3;
     }
     if (input.direction === LEFT) {
-        heroPos.x -= 1;
+        hero.position.x -= 1;
         hero.frame = 9;
     }
 };
@@ -61,8 +70,8 @@ const draw = () => {
 
     // Center the Hero in the cell
     const heroOffset = new Vector2(-8, -21);
-    const heroPosX = heroPos.x + heroOffset.x;
-    const heroPosY = heroPos.y + 1 + heroOffset.y;
+    const heroPosX = hero.position.x + heroOffset.x;
+    const heroPosY = hero.position.y + 1 + heroOffset.y;
     shadow.drawImage(ctx, heroPosX, heroPosY);
     hero.drawImage(ctx, heroPosX, heroPosY);
 };
