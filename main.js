@@ -1,3 +1,4 @@
+import { GameLoop } from './GameLoop';
 import { resources } from './src/Resource';
 import { Sprite } from './src/Sprite';
 import { Vector2 } from './src/Vector2';
@@ -32,6 +33,11 @@ const shadow = new Sprite({
 
 const heroPos = new Vector2(16 * 6, 16 * 5);
 
+const update = () => {
+    // Updating entities in a game
+
+};
+
 const draw = () => {
     skySprite.drawImage(ctx, 0, 0);
     groundSprite.drawImage(ctx, 0, 0);
@@ -42,9 +48,7 @@ const draw = () => {
     const heroPosY = heroPos.y + 1 + heroOffset.y;
     shadow.drawImage(ctx, heroPosX, heroPosY);
     hero.drawImage(ctx, heroPosX, heroPosY);
-}
+};
 
-setInterval(() => {
-    hero.frame += 1;
-    draw()
-}, 300);
+const gameLoop = new GameLoop(update, draw);
+gameLoop.start();
