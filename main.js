@@ -29,9 +29,7 @@ const hero = new Sprite({
     position: new Vector2(gridCells(6), gridCells(5))
 })
 
-const heroDestinationPosition = new Vector2(
-    gridCells(13), gridCells(5)
-);
+const heroDestinationPosition = hero.position.duplicate();
 
 const shadow = new Sprite({
     resource: resources.images.shadow,
@@ -43,26 +41,44 @@ const input = new Input();
 const update = () => {
 
     const distance = moveTowards(hero, heroDestinationPosition, 1)
-
-    return;
+    const hasArrived = distance <= 1;
+    if (hasArrived) {
+        tryMove();
+    }
     
+    
+};
+
+const tryMove = () => {
+
+    if (!input.direction) {
+        return;
+    }
+
+    let nextX = heroDestinationPosition.x;
+    let nextY = heroDestinationPosition.y;
+    const gridSize = 16;
+
     if (input.direction === DOWN) {
-        hero.position.y += 1;
+        nextY += gridSize;
         hero.frame = 0;
     }
     if (input.direction === UP) {
-        hero.position.y -= 1;
+        nextY -= gridSize;
         hero.frame = 6;
     }
     if (input.direction === RIGHT) {
-        hero.position.x += 1;
+        nextX += gridSize;
         hero.frame = 3;
     }
     if (input.direction === LEFT) {
-        hero.position.x -= 1;
+        nextX -= gridSize;
         hero.frame = 9;
     }
-};
+
+    heroDestinationPosition.x = nextX;
+    heroDestinationPosition.y = nextY;
+}
 
 const draw = () => {
     skySprite.drawImage(ctx, 0, 0);
