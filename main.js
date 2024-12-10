@@ -1,4 +1,5 @@
 import { Animations } from './src/Animations';
+import { Camera } from './src/Camera';
 import { events } from './src/Events';
 import { FrameIndexPattern } from './src/FrameIndexPattern';
 import { GameLoop } from './src/GameLoop';
@@ -23,7 +24,7 @@ const skySprite = new Sprite({
     resource: resources.images.sky,
     frameSize: new Vector2(320, 180)
 })
-mainScene.addChild(skySprite)
+
 const groundSprite = new Sprite({
     resource: resources.images.ground,
     frameSize: new Vector2(320, 180)
@@ -33,11 +34,10 @@ mainScene.addChild(groundSprite)
 const hero = new Hero(gridCells(6), gridCells(5))
 mainScene.addChild(hero);
 
-mainScene.input = new Input();
+const camera = new Camera();
+mainScene.addChild(camera);
 
-events.on('HERO_POSITION', mainScene, heroPosition => {
-    console.log("HERO MOVED!", heroPosition)
-})
+mainScene.input = new Input();
 
 const update = (delta) => {
     mainScene.stepEntry(delta, mainScene)
@@ -45,7 +45,19 @@ const update = (delta) => {
 };
 
 const draw = () => {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    skySprite.drawImage(ctx, 0, 0);
+
+    // Save the current state (for camera offset)
+    ctx.save();
+    // Offset by camera position
+    ctx.translate(camera.position.x, camera.position.y);
+
     mainScene.draw(ctx, 0, 0);
+    // Restore to original state
+    ctx.restore();
 };
 
 const gameLoop = new GameLoop(update, draw);
