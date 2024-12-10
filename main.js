@@ -1,4 +1,5 @@
 import { Animations } from './src/Animations';
+import { events } from './src/Events';
 import { FrameIndexPattern } from './src/FrameIndexPattern';
 import { GameLoop } from './src/GameLoop';
 import { GameObject } from './src/GameObject';
@@ -34,13 +35,16 @@ mainScene.addChild(hero);
 
 mainScene.input = new Input();
 
+events.on('HERO_POSITION', mainScene, heroPosition => {
+    console.log("HERO MOVED!", heroPosition)
+})
+
 const update = (delta) => {
     mainScene.stepEntry(delta, mainScene)
     // console.log(`${hero.position.x} ${hero.position.y}`);
 };
 
 const draw = () => {
-
     mainScene.draw(ctx, 0, 0);
 };
 
