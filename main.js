@@ -9,6 +9,7 @@ import { moveTowards } from './src/helpers/moveTowards';
 import { DOWN, Input, LEFT, RIGHT, UP } from './src/Input';
 import { walls } from './src/levels/level1';
 import { Hero } from './src/objects/Hero/Hero';
+import { Rod } from './src/objects/Rod/Rod';
 import { resources } from './src/Resource';
 import { Sprite } from './src/Sprite';
 import { Vector2 } from './src/Vector2';
@@ -36,6 +37,9 @@ mainScene.addChild(hero);
 
 const camera = new Camera();
 mainScene.addChild(camera);
+
+const rod = new Rod(gridCells(7), gridCells(6));
+mainScene.addChild(rod);
 
 mainScene.input = new Input();
 
