@@ -8,7 +8,7 @@ class Resources {
             rod: "/sprites/rod.png",
 
             cave: "/sprites/cave.png",
-            caveground: "/sprites/cave-ground.png",
+            caveGround: "/sprites/cave-ground.png",
             exit: "/sprites/exit.png",
         }
 

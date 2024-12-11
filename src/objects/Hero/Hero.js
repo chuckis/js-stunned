@@ -18,7 +18,6 @@ import {
 } from './heroAnimation';
 import { moveTowards } from "../../helpers/moveTowards";
 import { isSpaceFree } from "../../helpers/grid";
-import { walls } from "../../levels/level1";
 import { events } from "../../Events";
 
 export class Hero extends GameObject {
@@ -126,7 +125,7 @@ export class Hero extends GameObject {
         this.facingDirection = input.direction ?? this.facingDirection;
 
         // Validating that the next destination is free
-        if (isSpaceFree(walls, nextX, nextY)) {
+        if (isSpaceFree(root.level?.walls, nextX, nextY)) {
             this.destinationPosition.x = nextX;
             this.destinationPosition.y = nextY;
         }
