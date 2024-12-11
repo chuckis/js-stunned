@@ -6,12 +6,24 @@ export class GameObject {
         this.position = position ?? new Vector2(0, 0);
         this.children = [];
         this.parent = null;
+        this.hasReadyBeenCalled = false;
     }
 
     stepEntry(delta, root){
         this.children.forEach((child) => child.stepEntry(delta, root));
 
+        // Call ready on the first frame
+        if (!this.hasReadyBeenCalled) {
+            this.hasReadyBeenCalled = true;
+            this.ready();
+        }
+
         this.step(delta, root);
+    }
+
+        // Called before the first 'step'
+    ready() {
+        // ...
     }
     
     step(_delta){
