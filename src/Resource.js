@@ -5,7 +5,11 @@ class Resources {
             ground: "/sprites/ground.png",
             hero: "/sprites/hero.png",
             shadow: "/sprites/shadow.png",
-            rod: "/sprites/rod.png"
+            rod: "/sprites/rod.png",
+
+            cave: "/sprites/cave.png",
+            caveground: "/sprites/cave-ground.png",
+            exit: "/sprites/exit.png",
         }
 
     this.images = {}

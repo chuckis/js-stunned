@@ -8,6 +8,7 @@ import { gridCells, isSpaceFree } from './src/helpers/grid';
 import { moveTowards } from './src/helpers/moveTowards';
 import { DOWN, Input, LEFT, RIGHT, UP } from './src/Input';
 import { walls } from './src/levels/level1';
+import { Exit } from './src/objects/Exit/Exit';
 import { Hero } from './src/objects/Hero/Hero';
 import { Inventory } from './src/objects/Inventory/Inventory';
 import { Rod } from './src/objects/Rod/Rod';
@@ -32,6 +33,9 @@ const groundSprite = new Sprite({
     frameSize: new Vector2(320, 180)
 })
 mainScene.addChild(groundSprite)
+
+const exit = new Exit(gridCells(6), gridCells(3));
+mainScene.addChild(exit);
 
 const hero = new Hero(gridCells(6), gridCells(5))
 mainScene.addChild(hero);
