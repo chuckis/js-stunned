@@ -12,6 +12,7 @@ export class Exit extends GameObject {
         this.addChild(new Sprite({
             resource: resources.images.exit
         }))
+        this.drawLayer = "FLOOR";
         
     }
 
