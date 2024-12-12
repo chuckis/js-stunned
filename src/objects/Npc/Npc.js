@@ -9,6 +9,9 @@ export class Npc extends GameObject {
             position: new Vector2(x, y)
         });
 
+        // opt into being solid
+        this.isSolid = true;
+
         this.shadow = new Sprite({
             resource: resources.images.shadow,
             frameSize: new Vector2(32, 32),
@@ -25,7 +28,7 @@ export class Npc extends GameObject {
             position: new Vector2(-8, -20)
         })
         this.addChild(this.body);
-        
+
     }
 
 }

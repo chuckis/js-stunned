@@ -7,6 +7,9 @@ export class GameObject {
         this.children = [];
         this.parent = null;
         this.hasReadyBeenCalled = false;
+        this.isSolid = false;
+        this.drawLayer = null;
+        
     }
 
     stepEntry(delta, root){
