@@ -13,7 +13,8 @@ class Resources {
             // NPCs
             knight: "/sprites/knight-sheet-1.png",
             // HUD
-            textBox: "/sprites/text-box.png"
+            textBox: "/sprites/text-box.png",
+            fontWhite: "/sprites/sprite-font-white.png",
         }
 
     this.images = {}

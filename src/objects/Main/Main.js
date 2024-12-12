@@ -3,7 +3,7 @@ import { events } from "../../Events";
 import { GameObject } from "../../GameObject";
 import { Input } from "../../Input";
 import { Inventory } from "../Inventory/Inventory";
-import { TextBox } from "../TextBox/TextBox";
+import { SpriteTextString } from "../SpriteTextString/SpriteTextString";
 
 export class Main extends GameObject {
     constructor() {
@@ -14,7 +14,7 @@ export class Main extends GameObject {
         this.input = new Input();
         this.inventory  =new Inventory();
         this.camera = new Camera();
-        this.textbox = new TextBox()
+        this.textbox = new SpriteTextString("Hello! This is a content! This is a content! This is a content!")
     }
 
     ready() {
