@@ -11,7 +11,9 @@ class Resources {
             caveGround: "/sprites/cave-ground.png",
             exit: "/sprites/exit.png",
             // NPCs
-            knight: "/sprites/knight-sheet-1.png"
+            knight: "/sprites/knight-sheet-1.png",
+            // HUD
+            textBox: "/sprites/text-box.png"
         }
 
     this.images = {}
