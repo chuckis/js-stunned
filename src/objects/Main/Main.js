@@ -12,12 +12,19 @@ export class Main extends GameObject {
         });
         this.level = null;
         this.input = new Input();
-        this.inventory  =new Inventory();
         this.camera = new Camera();
-        this.textbox = new SpriteTextString("Hello! This is a content! This is a content! This is a content!")
+        
     }
 
     ready() {
+        const inventory = new Inventory();
+        this.addChild(inventory);
+
+        setTimeout(() => {
+            const textbox = new SpriteTextString("Hello! This is a content! This is a content!");
+        this.addChild(textbox);
+        }, 300);
+        
         events.on("CHANGE_LEVEL", this, newLevelInstance => {
             this,this.setLevel(newLevelInstance);
         })
@@ -37,8 +44,20 @@ export class Main extends GameObject {
         this.level?.background.drawImage(ctx, 0, 0);
     }
 
+    drawObjects(ctx) {
+        this.children.forEach(child => {
+            if (child.drawLayer !== "HUD") {
+                child.draw(ctx, 0, 0);
+            }
+        }) 
+    }
+
     drawForeground(ctx) {
-        this.inventory.draw(ctx, this.inventory.position.x, this.inventory.position.y);
-        this.textbox.draw(ctx, 0, 0);
+ 
+        this.children.forEach(child => {
+            if (child.drawLayer === "HUD") {
+                child.draw(ctx, 0, 0);
+            }
+        })
     }
 }

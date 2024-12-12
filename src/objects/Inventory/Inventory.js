@@ -21,6 +21,8 @@ export class Inventory extends GameObject {
                 image: resources.images.rod
             }
         ]
+
+        this.drawLayer = "HUD";
         
         // React to hero picking up an item
         events.on("HERO_PICKS_UP_ITEM", this, data => {

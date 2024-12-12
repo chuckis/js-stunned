@@ -33,7 +33,7 @@ const draw = () => {
         ctx.translate(mainScene.camera.position.x, mainScene.camera.position.y);
     }
 
-    mainScene.draw(ctx, 0, 0);
+    mainScene.drawObjects(ctx);
     // Restore to original state
     ctx.restore();
 

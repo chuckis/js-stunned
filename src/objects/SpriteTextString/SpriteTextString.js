@@ -9,6 +9,9 @@ export class SpriteTextString extends GameObject {
         super({
             position: new Vector2(32, 108)
         })
+
+        this.drawLayer = "HUD";
+
         const content = str ?? "Default text";
 
         // Create an array of words
@@ -46,8 +49,25 @@ export class SpriteTextString extends GameObject {
             frameSize: new Vector2(256, 64),
 
         })
+
+        // Typewriter
+        this.showingIndex = 0;
+        this.textSpeed = 80;
+        this.timeUntilNextShow = this.textSpeed;
         
     }
+
+    step(delta) {
+        this.timeUntilNextShow -= delta;
+        if (this.timeUntilNextShow <= 0) {
+            // Increase amount of charactes that are drawn
+            this.showingIndex += 1;
+
+            // Reset time counter for next character
+            this.timeUntilNextShow = this.textSpeed;
+        }
+    }
+
     drawImage(ctx, drawPosX, drawPosY) {
         // Draw backdrop first
         this.backdrop.drawImage(ctx, drawPosX, drawPosY)
@@ -61,6 +81,7 @@ export class SpriteTextString extends GameObject {
         // Initial position of cursor
         let cursorX = drawPosX + PADDING_LEFT;
         let cursorY = drawPosY + PADDING_TOP;
+        let currentShowingIndex = 0;
 
         this.words.forEach(word => {
             // Decide if we can fit this next word on this next line
@@ -72,6 +93,12 @@ export class SpriteTextString extends GameObject {
 
             // Draw this whole segment of text
             word.chars.forEach(char => {
+
+                // Stop here if we should not yet show the following character
+                if (currentShowingIndex > this.showingIndex) {
+                    return
+                }
+
                 const {sprite, width} = char;
 
                 const withCharOffset = cursorX - 5;
@@ -82,6 +109,9 @@ export class SpriteTextString extends GameObject {
 
                 // plus 1px between character
                 cursorX += 1;
+
+                // Uptick the index we are counting
+                currentShowingIndex += 1;
             })
             // Move the cursor over
             cursorX += 3;
