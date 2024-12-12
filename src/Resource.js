@@ -10,6 +10,8 @@ class Resources {
             cave: "/sprites/cave.png",
             caveGround: "/sprites/cave-ground.png",
             exit: "/sprites/exit.png",
+            // NPCs
+            knight: "/sprites/knight-sheet-1.png"
         }
 
     this.images = {}
