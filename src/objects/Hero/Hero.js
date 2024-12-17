@@ -71,6 +71,14 @@ export class Hero extends GameObject {
             return;
         }
 
+        // Check for input
+        const input = root.input;
+        if(input?.getActionJustPressed("Space")) {
+            console.log("ACTION!!!");
+            events.emit("HERO_REQUESTS_ACTION");
+        }
+
+
         const distance = moveTowards(this, this.destinationPosition, 1)
         const hasArrived = distance <= 1;
         if (hasArrived) {

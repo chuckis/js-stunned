@@ -21,7 +21,7 @@ export class Main extends GameObject {
         this.addChild(inventory);
 
         setTimeout(() => {
-            const textbox = new SpriteTextString("Hello! This is a content! This is a content!");
+            const textbox = new SpriteTextString("Hello! This is a content! This is a content! This is a content! This is a content!");
         this.addChild(textbox);
         }, 300);
         

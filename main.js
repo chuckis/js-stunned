@@ -18,6 +18,7 @@ mainScene.setLevel(new CaveLevel1);
 const update = (delta) => {
     mainScene.stepEntry(delta, mainScene)
     // console.log(`${hero.position.x} ${hero.position.y}`);
+    mainScene.input?.update();
 };
 
 const draw = () => {

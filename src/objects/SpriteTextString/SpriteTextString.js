@@ -1,3 +1,4 @@
+import { events } from "../../Events";
 import { GameObject } from "../../GameObject";
 import { resources } from "../../Resource";
 import { Sprite } from "../../Sprite";
@@ -52,12 +53,27 @@ export class SpriteTextString extends GameObject {
 
         // Typewriter
         this.showingIndex = 0;
+        this.finalIndex = this.words.reduce((acc, word) => acc + word.chars.length, 0)
         this.textSpeed = 80;
         this.timeUntilNextShow = this.textSpeed;
         
     }
 
-    step(delta) {
+    step(delta, root) {
+
+        // Listen for user input
+        const input = root.input;
+        if(input?.getActionJustPressed("Space")) {
+            if (this.showingIndex < this.finalIndex) {
+                // Skip
+                this.showingIndex = this.finalIndex;
+                return;
+            }
+
+            // done with the textbox
+            events.emit("END_TEXT_BOX");
+        }
+
         this.timeUntilNextShow -= delta;
         if (this.timeUntilNextShow <= 0) {
             // Increase amount of charactes that are drawn
