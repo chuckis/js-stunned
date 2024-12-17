@@ -48,6 +48,7 @@ export class Hero extends GameObject {
         this.facingDirection = DOWN;
         this.destinationPosition = this.position.duplicate()
         this.addChild(this.body);
+        this.isLocked = false;
 
         this.shadow = new Sprite({
             resource: resources.images.shadow,
@@ -63,7 +64,20 @@ export class Hero extends GameObject {
         })
     }
 
+    ready() {
+        events.on("START_TEXT_BOX", this, () => {
+            this.isLocked = true;
+        })
+        events.on("END_TEXT_BOX", this, () => {
+            this.isLocked = false;
+        })
+    }
+
     step(delta, root) {
+
+        if (this.isLocked) {
+            return;
+        }
 
         if (this.itemPickupTime > 0) {
             

@@ -19,14 +19,18 @@ export class Main extends GameObject {
     ready() {
         const inventory = new Inventory();
         this.addChild(inventory);
-
-        setTimeout(() => {
-            const textbox = new SpriteTextString("Hello! This is a content! This is a content! This is a content! This is a content!");
-        this.addChild(textbox);
-        }, 300);
         
         events.on("CHANGE_LEVEL", this, newLevelInstance => {
             this,this.setLevel(newLevelInstance);
+        })
+
+        // Launch textbox handler
+        events.on("HERO_REQUESTS_ACTION", this, () => {
+            const textbox = new SpriteTextString("Howdy, friend?");
+        this.addChild(textbox);
+
+        events.emit("START_TEXT_BOX");
+        
         })
     }
 
