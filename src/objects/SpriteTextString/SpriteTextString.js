@@ -6,16 +6,15 @@ import { Vector2 } from "../../Vector2";
 import { getCharacterWidth, getCharacterFrame } from "./spriteFontMap";
 
 export class SpriteTextString extends GameObject {
-    constructor(str) {
+    constructor(config={}) {
         super({
             position: new Vector2(32, 108)
         })
 
         this.drawLayer = "HUD";
 
-        const content = str ?? "Default text";
-
         // Create an array of words
+        const content = config.string ?? "Default text";
         this.words = content.split(" ").map(word => {
             // We need to know how wide this word is 
             let wordWidth = 0;
@@ -51,9 +50,16 @@ export class SpriteTextString extends GameObject {
 
         })
 
+        // Create a portrait
+        this.portrait = new Sprite({
+            resource: resources.images.portraits,
+            hFrames: 4,
+            frame: config.portraitFrame ?? 0
+        })
+
         // Typewriter
         this.showingIndex = 0;
-        this.finalIndex = this.words.reduce((acc, word) => acc + word.chars.length, 0)
+        this.finalIndex = this.words.reduce((acc, word) => acc + word.chars.length, 0);
         this.textSpeed = 80;
         this.timeUntilNextShow = this.textSpeed;
         
@@ -88,11 +94,14 @@ export class SpriteTextString extends GameObject {
         // Draw backdrop first
         this.backdrop.drawImage(ctx, drawPosX, drawPosY)
 
+        // Draw the portrait
+        this.portrait.drawImage(ctx, drawPosX+6, drawPosY+6);
+
         // Configuration options - 
         const LINE_WIDTH_MAX = 240;
         const LINE_VERTICAL_HEIGHT = 14;
-        const PADDING_LEFT = 7;
-        const PADDING_TOP = 7;
+        const PADDING_LEFT = 27;
+        const PADDING_TOP = 9;
 
         // Initial position of cursor
         let cursorX = drawPosX + PADDING_LEFT;

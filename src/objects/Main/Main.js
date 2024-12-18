@@ -25,15 +25,21 @@ export class Main extends GameObject {
         })
 
         // Launch textbox handler
-        events.on("HERO_REQUESTS_ACTION", this, () => {
-            const textbox = new SpriteTextString("Howdy, friend?");
-        this.addChild(textbox);
-        events.emit("START_TEXT_BOX");
-            // Unsubscribe from this textbox after it's destroyed
-        const endingSub = events.on("END_TEXT_BOX", this, () => {
-            textbox.destroy();
-            events.off(endingSub); 
-        })
+        events.on("HERO_REQUESTS_ACTION", this, (withObject) => {
+            if (typeof withObject.getContent === "function") {
+                const content = withObject.getContent();
+                const textbox = new SpriteTextString({
+                    portraitFrame: content.portraitFrame,
+                    string: content.string
+                });
+                this.addChild(textbox);
+                events.emit("START_TEXT_BOX");
+                // Unsubscribe from this textbox after it's destroyed
+                const endingSub = events.on("END_TEXT_BOX", this, () => {
+                    textbox.destroy();
+                    events.off(endingSub);
+                })
+            }
         })
     }
 

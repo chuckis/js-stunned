@@ -4,13 +4,17 @@ import { Sprite } from "../../Sprite";
 import { Vector2 } from "../../Vector2";
 
 export class Npc extends GameObject {
-    constructor(x, y) {
+    constructor(x, y, textContent={}) {
         super({
             position: new Vector2(x, y)
         });
 
         // opt into being solid
         this.isSolid = true;
+
+        //Say something
+        this.textContent = textContent.content;
+        this.textPortraitFrame = textContent.portraitFrame;
 
         this.shadow = new Sprite({
             resource: resources.images.shadow,
@@ -29,6 +33,16 @@ export class Npc extends GameObject {
         })
         this.addChild(this.body);
 
+    }
+
+    getContent() {
+
+        // Maybe expand with story flag logic, etc
+
+        return {
+            portraitFrame: this.textPortraitFrame,
+            string: this.textContent
+        }
     }
 
 }

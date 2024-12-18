@@ -88,8 +88,12 @@ export class Hero extends GameObject {
         // Check for input
         const input = root.input;
         if(input?.getActionJustPressed("Space")) {
-            console.log("ACTION!!!");
-            events.emit("HERO_REQUESTS_ACTION");
+            const objAtPosition = this.parent.children.find(child => {
+                return child.position.matches(this.position.toNeighbor(this.facingDirection));
+            })
+            if (objAtPosition) {
+                events.emit("HERO_REQUESTS_ACTION", objAtPosition);
+            }
         }
 
 
