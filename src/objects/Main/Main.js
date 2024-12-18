@@ -2,6 +2,7 @@ import { Camera } from "../../Camera";
 import { events } from "../../Events";
 import { GameObject } from "../../GameObject";
 import { Input } from "../../Input";
+import { storyFlags } from "../../StoryFlags";
 import { Inventory } from "../Inventory/Inventory";
 import { SpriteTextString } from "../SpriteTextString/SpriteTextString";
 
@@ -28,6 +29,17 @@ export class Main extends GameObject {
         events.on("HERO_REQUESTS_ACTION", this, (withObject) => {
             if (typeof withObject.getContent === "function") {
                 const content = withObject.getContent();
+
+                if (!content) {
+                    return;
+                }
+
+                // Potentially add a story flag
+                if (content.addsFlag) {
+                    console.log("ADD FLAG", content.addsFlag);
+                    storyFlags.add(content.addsFlag);
+                }
+                // Show the textbox
                 const textbox = new SpriteTextString({
                     portraitFrame: content.portraitFrame,
                     string: content.string

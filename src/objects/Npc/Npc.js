@@ -49,7 +49,7 @@ export class Npc extends GameObject {
         return {
             portraitFrame: this.textPortraitFrame,
             string: match.string,
-            addFlags: match.addsFlag ?? null 
+            addsFlag: match.addsFlag ?? null 
         }
     }
 

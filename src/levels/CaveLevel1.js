@@ -40,15 +40,23 @@ export class CaveLevel1 extends Level {
 
         const npc1 = new Npc(gridCells(5), gridCells(5), {
             content: [
+                
                 {
-                    string: "I say this second!",
-                    requires: [TALKED_TO_A],
+                  string: "I just can't stand that guy.",
+                  requires: [TALKED_TO_B],
+                  bypass: [TALKED_TO_A],
+                  addsFlag: TALKED_TO_A,
                 },
                 {
-                    string: "I say this first!",
+                  string: "He is just the worst!",
+                  requires: [TALKED_TO_A],
+                },
+                {
+                    string: "Grumble grumble. Another day at work.",
+                    requires: [],
                     addsFlag: TALKED_TO_A
-                }
-            ],
+                  }
+              ],
             portraitFrame: 1
         });
         this.addChild(npc1);
