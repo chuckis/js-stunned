@@ -21,8 +21,8 @@ class StoryFlags {
 
             // Disqualify if we find a missing required flag
             const requiredFlags = scenario.requires ?? [];
-            for (let I = 0; I < requiredFlags; I++) {
-                const thisFlag = requiredFlags[I];
+            for (let i=0; i<requiredFlags.length; i++) {
+                const thisFlag = requiredFlags[i];
                 if (!this.flags.has(thisFlag)) {
                     return false;
                 } 
