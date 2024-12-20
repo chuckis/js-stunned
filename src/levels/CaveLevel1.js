@@ -40,7 +40,7 @@ export class CaveLevel1 extends Level {
 
         const npc1 = new Npc(gridCells(5), gridCells(5), {
             content: [
-                
+
                 {
                   string: "I just can't stand that guy.",
                   requires: [TALKED_TO_B],
@@ -53,8 +53,7 @@ export class CaveLevel1 extends Level {
                 },
                 {
                     string: "Grumble grumble. Another day at work.",
-                    requires: [],
-                    addsFlag: TALKED_TO_A
+                    requires: []
                   }
               ],
             portraitFrame: 1

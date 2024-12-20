@@ -1,7 +1,6 @@
 
 import { GameLoop } from './src/GameLoop';
 import { CaveLevel1 } from './src/levels/CaveLevel1';
-import { OutdoorLevel1 } from './src/levels/OutdoorLevel1';
 import { Main } from './src/objects/Main/Main';
 import { Vector2 } from './src/Vector2';
 import './style.css'

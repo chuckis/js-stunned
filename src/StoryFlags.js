@@ -8,15 +8,16 @@ class StoryFlags {
     }
 
     getRelevantScenario(scenarios=[]) {
+
         return scenarios.find(scenario => {
 
             // Disqualify when any bypass flags are present
             const bypassFlags = scenario.bypass ?? [];
-            for (let I = 0; I < bypassFlags.length; I++) {
-                const thisFlag = bypassFlags[I];
+            for (let i=0; i<bypassFlags.length; i++) {
+                const thisFlag = bypassFlags[i];
                 if (this.flags.has(thisFlag)) {
                     return false;
-                } 
+                }
             }
 
             // Disqualify if we find a missing required flag
@@ -25,12 +26,12 @@ class StoryFlags {
                 const thisFlag = requiredFlags[i];
                 if (!this.flags.has(thisFlag)) {
                     return false;
-                } 
+                }
             }
 
             // If we made it this far, this scenario is relevant
             return true;
-        })
+        });
     }
 }
 
